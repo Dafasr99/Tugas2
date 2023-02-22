@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h5>Nama Tugas: </h5>
+  <b>{{ assignment.name }}</b>
+
+  <table>
+    <tr>
+      <th>Mata Kuliah</th>
+      <th>Tenggat Waktu</th>
+      <th>Progress</th>
+      <th>Deskripsi</th>
+    </tr>
+    {% for assignment in assignment_list %}
+      <tr>
+        <td>{{ assignment.subject }}</td>
+        <td>{{ assignment.date }}</td>
+        <td>{{ assignment.progress }}</td>
+        <td>{{ assignment.description }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+{% endblock content %}
