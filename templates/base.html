@@ -1,7 +1,7 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,29 +9,10 @@
   {% block meta %}
   {% endblock meta %}
 </head>
+
 <body>
   {% block content %}
-    <h1>Daftar Tugas</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Nama Tugas</th>
-          <th>Mata Kuliah</th>
-          <th>Tenggat Waktu</th>
-          <th>Progress</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for assignment in assignments %}
-        <tr>
-          <td>{{ assignment.name }}</td>
-          <td>{{ assignment.subject }}</td>
-          <td>{{ assignment.date }}</td>
-          <td>{{ assignment.progress }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
   {% endblock content %}
 </body>
+
 </html>
