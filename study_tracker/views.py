@@ -9,7 +9,8 @@ from django.http import JsonResponse
 
 def assignment_list(request):
     assignments = Assignment.objects.all()
-    return render(request, 'assignment_list.html', {'assignments': assignments})
+    jumlah = Assignment.objects.count()
+    return render(request, 'assignment_list.html', {'assignments': assignments, 'jumlah': jumlah})
 
 def create_assignment(request):
     form = AssignmentForm(request.POST or None)

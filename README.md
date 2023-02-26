@@ -63,3 +63,5 @@ Singkatnya, pengiriman data merupakan komponen penting dari setiap implementasi 
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
 
+
+
