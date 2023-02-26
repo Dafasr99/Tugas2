@@ -6,13 +6,15 @@
 
   <table>
     <tr>
+      <th>nama</th>
       <th>Mata Kuliah</th>
       <th>Tenggat Waktu</th>
       <th>Progress</th>
       <th>Deskripsi</th>
     </tr>
-    {% for assignment in assignment_list %}
+    {% for assignment in assignments %}
       <tr>
+        <td>{{ assignment.name }}</td>
         <td>{{ assignment.subject }}</td>
         <td>{{ assignment.date }}</td>
         <td>{{ assignment.progress }}</td>
@@ -20,5 +22,12 @@
       </tr>
     {% endfor %}
   </table>
+
+  <br>
+<a href="{% url 'study_tracker:create_assignment' %}">
+    <button>
+        Jadwal Baru
+    </button>
+</a>
 
 {% endblock content %}

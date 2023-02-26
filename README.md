@@ -1,168 +1,65 @@
-TUGAS README
+## TUGAS README
 
 ------------
 
-link menuju aplikasi Railway yang sudah di-deploy
-https://study-tracker.up.railway.app/study-tracker/
+### link menuju aplikasi Railway yang sudah di-deploy
+- https://study-tracker.up.railway.app/study-tracker/XML 
+- https://study-tracker.up.railway.app/study-tracker/json
 
 ------------
-Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
 
-https://compfest.link/Bagan-Req-Client 
+### Apakah kita dapat menginput data selain melalui form? Namun mengapa form dapat dikatakan lebih baik daripada menggunakan cara tersebut?
 
-------------
-Jelaskan kenapa menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
+Ya, kita dapat menginput data selain melalui form Django, yaitu dengan menggunakan ORM (Object-Relational Mapping) Django. Dalam ORM, kita dapat membuat objek model dan menyimpannya ke dalam database dengan menggunakan metode save().
 
-Berikut beberapa alasan mengapa menggunakan environment serta tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment
+Ada beberapa alasan mengapa menggunakan form pada Django lebih baik dibandingkan dengan menginput data langsung ke database. Berikut adalah beberapa di antaranya:
 
-Prevent conflict: Virtual environment memungkinkan kita untuk mengisolasi dependensi (package) dan konfigurasi dari satu proyek ke proyek lain, sehingga mencegah terjadinya konflik dalam penggunaan package, dan memungkinkan pengembang untuk mengelola proyek dengan mudah.
+Validasi data: Django menyediakan fitur validasi data yang memastikan data yang diinput sesuai dengan aturan yang telah ditetapkan. Hal ini dapat meminimalkan kesalahan input data dan membuat data yang tersimpan di database lebih akurat.
 
-Consistent reproduction: Virtual environment memungkinkan pengembang untuk memastikan bahwa proyek yang sama dapat di-reproduksi dengan konsisten pada mesin yang berbeda, karena dependensi yang digunakan sama dan versinya dapat dikendalikan.
+Keamanan: Form pada Django mengambil keuntungan dari keamanan yang telah diterapkan pada Django. Form memastikan bahwa data yang dimasukkan aman dari serangan seperti injeksi SQL, XSS, dan serangan keamanan lainnya.
 
-Different python version: Dalam beberapa kasus, mungkin diperlukan untuk menggunakan beberapa versi Python dalam satu mesin. Dengan virtual environment, pengembang dapat membuat lingkungan pengembangan yang terpisah untuk setiap versi Python yang dibutuhkan.
+Kemudahan: Form pada Django mempermudah proses input data karena kita tidak perlu menuliskan kode SQL atau melakukan query langsung ke database. Django menyediakan fitur ORM yang memungkinkan kita untuk memanipulasi data secara mudah menggunakan Python.
 
-Security: Menggunakan virtual environment dapat membantu mencegah kerentanan keamanan yang mungkin timbul dari penggunaan paket atau pustaka yang sudah usang.
-
-Referensi:
-
-- Python.org. (2021). Virtual Environments. Diakses pada 24 Februari 2023, dari https://docs.python.org/3/tutorial/venv.html
-
-- Real Python. (2021). Python Virtual Environments: A Primer. Diakses pada 24 Februari 2023, dari https://realpython.com/python-virtual-environments-a-primer/
-
-- Stack Overflow. (2013). Is it possible to create Django-based web applications without using a virtual environment?. Diakses pada 24 Februari 2023, dari https://stackoverflow.com/questions/15149597/is-it-possible-to-create-django-based-web-applications-without-using-a-virtual-e
-
-- Reddit. (2020). Using Django without a virtual environment. Diakses pada 24 Februari 2023, dari https://www.reddit.com/r/django/comments/gmk8d9/using_django_without_a_virtual_environment/
-
-
+Kemudahan penggunaan: Form pada Django dirancang untuk digunakan oleh pengguna yang tidak terlalu mengerti tentang teknis programming. Oleh karena itu, pengguna yang tidak mengerti tentang coding tetap dapat memanfaatkan fitur-fitur Django seperti form untuk mengelola data.
 
 ------------
-Penjelasan bagaimana cara mengimplementasikan poin 1 sampai dengan 4 di atas.
 
-- Melakukan git pull dari github "https://github.com/determinedguy/django-railway-template"
+### Jelaskan perbedaan antara JSON, XML, dan HTML!
 
-- Instal dependencies yang diperlukan untuk menjalankan proyek Django dengan perintah perintah pip install -r requirements.txt.
+- JSON (JavaScript Object Notation):
+JSON adalah format pertukaran data ringan yang digunakan untuk mentransmisikan data antara server dan aplikasi web. Ini didasarkan pada sintaks JavaScript dan sering digunakan dengan JavaScript untuk membuat halaman web yang dinamis. Data JSON direpresentasikan sebagai key-value pair, di mana kuncinya selalu string dan nilainya bisa dari berbagai jenis seperti string, angka, array, atau objek. JSON lebih ringkas daripada XML dan karena itu lebih cepat diurai, menjadikannya pilihan populer untuk aplikasi web yang membutuhkan kinerja tinggi.
 
-yang berisi:
+- XML (Extensible Markup Language):
+XML adalah bahasa markup yang digunakan untuk menyandikan dokumen dalam format yang dapat dibaca oleh manusia dan dapat dibaca oleh mesin. Ini banyak digunakan untuk bertukar data antara sistem yang berbeda. XML menggunakan tag untuk mendefinisikan elemen dan atribut untuk memberikan informasi tambahan tentang elemen tersebut. Ini juga mendukung struktur hierarkis, menjadikannya pilihan yang baik untuk merepresentasikan data yang kompleks. XML lebih bertele-tele dibandingkan dengan JSON, yang membuatnya lebih lambat untuk diuraikan, tetapi juga lebih fleksibel dan dapat diperluas.
 
-asgiref==3.6.0
-certifi==2022.12.7
-charset-normalizer==3.0.1
-dj-database-url==1.2.0
-Django==4.1.7
-gunicorn==20.1.0
-idna==3.4
-psycopg2-binary==2.9.5
-pytz==2022.7.1
-requests==2.28.2
-six==1.16.0
-sqlparse==0.4.3
-typed-ast==1.5.4
-tzdata==2022.7
-urllib3==1.26.14
-whitenoise==6.3.0
-wrapt==1.14.1
+- HTML (Hypertext Markup Language):
+HTML adalah bahasa markup yang digunakan untuk membuat halaman web. Ini mendefinisikan struktur dan konten halaman web, termasuk teks, gambar, tautan, dan elemen lainnya. HTML menggunakan tag untuk mendefinisikan elemen dan atributnya. Tidak seperti JSON dan XML, HTML dirancang khusus untuk menampilkan konten di browser web, bukan untuk bertukar data antar sistem. HTML dapat digunakan untuk membuat halaman web yang dinamis, tetapi sering digunakan bersamaan dengan teknologi lain seperti JavaScript, CSS, dan bahasa skrip sisi server.
 
-- Membuat sebuah aplikasi baru pada proyek tersebut bernama study_tracker
-Membuat sebuah proyek Django baru bernama django_project dengan perintah django-admin startproject study_tracker .
+### Referensi: 
+- JSON.org. (n.d.). JSON: The JavaScript Object Notation. Retrieved from https://www.json.org/json-en.html 
+- W3C. (2008). Extensible Markup Language (XML) 1.0 (Fifth Edition). Retrieved from https://www.w3.org/TR/REC-xml/
+- Mozilla. (n.d.). HTML Basics. Retrieved from https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics
+- W3C. (2008). Extensible Markup Language (XML) 1.0 (Fifth Edition). Retrieved from https://www.w3.org/TR/REC-xml/
+- JSON.org. (n.d.). JSON: The JavaScript Object Notation. Retrieved from https://www.json.org/json-en.html
+- Mozilla. (n.d.). HTML Basics. Retrieved from https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics
 
-- Membuka settings.py di folder django_project dan menambahkan aplikasi study_tracker ke dalam variabel INSTALLED_APPS untuk mendaftarkan django-app yang sudah dibuat kedalam proyek django.
+------------
 
-menjadi seperti ini
+### Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform !
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'main',
-    'study_tracker'
-]
+Pengiriman data adalah komponen penting dalam mengimplementasikan platform karena memungkinkan transfer informasi antara berbagai bagian platform dan penggunanya. Sistem pengiriman data memungkinkan pengiriman data secara efisien, aman, dan akurat, memastikan bahwa pengguna dapat mengakses informasi yang mereka butuhkan secara tepat waktu. Selain itu, sistem pengiriman data yang kuat dapat meningkatkan pengalaman pengguna dengan meningkatkan kecepatan, keandalan, dan kinerja platform secara keseluruhan.
 
-- Membuat model pada aplikasi study_tracker yang bernama Assignment dan memiliki atribut
+Menurut laporan IBM, pengiriman data merupakan komponen penting dari platform modern, yang harus mendukung transfer data berkecepatan tinggi antara pengguna, perangkat, dan aplikasi. Laporan tersebut mencatat bahwa karena volume data yang dihasilkan oleh platform ini terus meningkat, ada kebutuhan yang meningkat akan sistem pengiriman data yang dapat diskalakan secara efektif untuk menangani data ini. Tanpa sistem pengiriman data yang andal, platform mungkin mengalami waktu muat yang lambat, kehilangan data, dan masalah kinerja lainnya yang dapat berdampak negatif pada pengalaman pengguna.
 
-menjadi seperti ini
+Demikian pula, dalam laporan oleh Akamai, penyedia jaringan pengiriman konten terkemuka, pengiriman data disorot sebagai komponen penting dalam memberikan pengalaman online yang cepat dan aman. Laporan tersebut mencatat bahwa sistem pengiriman data harus dirancang untuk mendukung berbagai jenis konten, termasuk teks, gambar, audio, dan video, dan harus dapat beradaptasi dengan perubahan kondisi jaringan untuk memastikan kinerja yang optimal.
 
-from django.db import models
+Singkatnya, pengiriman data merupakan komponen penting dari setiap implementasi platform. Sistem pengiriman data yang kuat memungkinkan transfer data yang efisien, aman, dan akurat antara pengguna, perangkat, dan aplikasi, meningkatkan pengalaman pengguna dan memastikan bahwa platform dapat diskalakan secara efektif untuk menangani volume data yang terus bertambah.
 
-class Assignment(models.Model):
-    name = models.CharField(max_length=100)
-    subject = models.CharField(max_length=100)
-    date = models.DateTimeField()
-    progress = models.IntegerField()
-    description = models.TextField()
+### Referensi:
+- IBM. (2018). IBM Cloud Pak for Data: Modernizing your data platform. Retrieved from https://www.ibm.com/downloads/cas/6GMRZVWY
+- Akamai. (2019). State of the internet/security: A year in review. Retrieved from https://www.akamai.com/us/en/multimedia/documents/state-of-the-internet/state-of-the-internet-security-year-in-review-2019.pdf
 
-- melakukan perintah python manage.py makemigrations untuk mempersiapkan migrasi skema model ke dalam database Django lokal.
+------------
 
-- menjalankan perintah python manage.py migrate untuk menerapkan skema model yang telah dibuat ke dalam database Django lokal.
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
 
-- Membuat sebuah fungsi pada views.py yang dapat melakukan pengambilan data dari model yang telah dibuat sebelumnya dan dikembalikan ke dalam sebuah HTML.
-
-menjadi seperti ini
-
-from django.shortcuts import render
-from .models import Assignment
-
-def assignment_list(request):
-    assignments = Assignment.objects.all()
-    return render(request, 'assignment_list.html', {'assignments': assignments})
-
-- Sebelum kita mengimplemetasikan views, kita perlu membuat suatu skeleton yang berfungsi sebagai kerangka views dari situs web kita.
-
-dengan menambahkan file template pada root folder 
-
-berisi:
-
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
-  {% block meta %}
-  {% endblock meta %}
-</head>
-<body>
-  {% block content %}
-    <h1>Daftar Tugas</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Nama Tugas</th>
-          <th>Mata Kuliah</th>
-          <th>Tenggat Waktu</th>
-          <th>Progress</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for assignment in assignments %}
-        <tr>
-          <td>{{ assignment.name }}</td>
-          <td>{{ assignment.subject }}</td>
-          <td>{{ assignment.date }}</td>
-          <td>{{ assignment.progress }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% endblock content %}
-</body>
-</html>
-
-- Menambahkan path pada urls.py
-
-berisi:
-
-from django.urls import path
-from . import views
-
-app_name = 'study_tracker'
-
-urlpatterns = [
-    path('', views.assignment_list, name='assignment_list'),
-]
-
-- Dapat menjalankan proyek Django dengan perintah python manage.py runserver dan =membuka http://localhost:8000/study-tracker/ 
