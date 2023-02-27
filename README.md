@@ -67,6 +67,7 @@ Singkatnya, pengiriman data merupakan komponen penting dari setiap implementasi 
 
 menjadi seperti ini
 
+```
 from django.db import models
 
 TYPE_CHOICES = [
@@ -82,6 +83,7 @@ class Assignment(models.Model):
     date = models.DateTimeField()
     progress = models.IntegerField()
     description = models.TextField()
+```
 
 - Melakukan perintah python manage.py makemigrations study_tracker dan python manage.py migrate pada Terminal atau Command Prompt untuk mengaplikasikan perubahan model yang telah dilakukan pada langkah sebelumnya.
 
@@ -89,6 +91,7 @@ class Assignment(models.Model):
 
 menjadi seperti ini
 
+```
 from django import forms
 from django.forms import ModelForm, NumberInput
 from study_tracker.models import Assignment
@@ -100,6 +103,7 @@ class AssignmentForm(ModelForm):
         fields = ['name', 'type', 'subject', 'date', 'progress', 'description']
         
     date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+```
 
 - Membuka file views.py pada folder study_tracker dan menambahkan import yang diperlukan serta menambahkan beberapa kode untuk mengembalikan data dalam bentuk XML dan Json 
 
@@ -107,6 +111,7 @@ class AssignmentForm(ModelForm):
 
 menjadi seperti ini
 
+```
 {% extends 'base.html' %}
 
 {% load static %}
@@ -129,9 +134,11 @@ menjadi seperti ini
 </form>
 
 {% endblock %}
+```
  
 - Membuka urls.py pada folder study_tracker dan mengimport 
 
+```
 from django.urls import path
 from . import views
 from study_tracker.views import create_assignment
@@ -148,7 +155,7 @@ urlpatterns = [
     path('xml/<int:id>', show_xml_by_id, name='show_xml_by_id'),
     path('json/<int:id>', show_json_by_id, name='show_json_by_id'), 
 ]
-
+```
 
 
 
