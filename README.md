@@ -63,5 +63,97 @@ Singkatnya, pengiriman data merupakan komponen penting dari setiap implementasi 
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
 
+- Membuka models.py yang ada pada folder study_tracker yang sudah dibuat sebelumnya. 
+
+menjadi seperti ini
+
+from django.db import models
+
+TYPE_CHOICES = [
+    ('Tugas Harian', 'Tugas Harian'),
+    ('Tugas Akhir', 'Tugas Akhir'),
+    ('Ujian', 'Ujian'),
+]
+
+class Assignment(models.Model):
+    name = models.CharField(max_length=100)
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    subject = models.CharField(max_length=100)
+    date = models.DateTimeField()
+    progress = models.IntegerField()
+    description = models.TextField()
+
+- Melakukan perintah python manage.py makemigrations study_tracker dan python manage.py migrate pada Terminal atau Command Prompt untuk mengaplikasikan perubahan model yang telah dilakukan pada langkah sebelumnya.
+
+- Membuat file baru pada folder study_tracker dengan nama forms.py yang dapat menerima data jadwal baru 
+
+menjadi seperti ini
+
+from django import forms
+from django.forms import ModelForm, NumberInput
+from study_tracker.models import Assignment
+
+class AssignmentForm(ModelForm):
+ 
+    class Meta:
+        model = Assignment
+        fields = ['name', 'type', 'subject', 'date', 'progress', 'description']
+        
+    date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+- Membuka file views.py pada folder study_tracker dan menambahkan import yang diperlukan serta menambahkan beberapa kode untuk mengembalikan data dalam bentuk XML dan Json 
+
+- Membuat file HTML baru yang bernama create_assignment pada folder study_tracker/templates.
+
+menjadi seperti ini
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>Tambah Jadwal Baru</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Tambah"/>
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}
+ 
+- Membuka urls.py pada folder study_tracker dan mengimport 
+
+from django.urls import path
+from . import views
+from study_tracker.views import create_assignment
+from study_tracker.views import show_xml, show_json
+from study_tracker.views import show_xml_by_id, show_json_by_id
+
+setelah itu menambahkan path yang diperlukan
+
+urlpatterns = [
+    path('', views.assignment_list, name='assignment_list'),
+    path('create', create_assignment, name='create_assignment'),
+    path('xml/', show_xml, name='show_xml'),
+    path('json/', show_json, name='show_json'),
+    path('xml/<int:id>', show_xml_by_id, name='show_xml_by_id'),
+    path('json/<int:id>', show_json_by_id, name='show_json_by_id'), 
+]
+
+
+
+
+
+
+
 
 
