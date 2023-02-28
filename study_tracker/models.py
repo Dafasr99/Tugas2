@@ -2,6 +2,9 @@ from django.db import models
 
 TYPE_CHOICES = [
     ('Tugas Harian', 'Tugas Harian'),
+    ('Tugas Kelompok', 'Tugas Kelompok'),
+    ('Tugas Mandiri', 'Tugas Mandiri'),
+    ('Tugas Praktikum', 'Tugas Praktikum'),
     ('Tugas Akhir', 'Tugas Akhir'),
     ('Ujian', 'Ujian'),
 ]
