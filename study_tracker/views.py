@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from study_tracker.models import Assignment
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse, JsonResponse
 from study_tracker.forms import AssignmentForm
 from django.urls import reverse
-from django.http import HttpResponse
 from django.core import serializers
-from django.http import JsonResponse
 
 def assignment_list(request):
     assignments = Assignment.objects.all()
