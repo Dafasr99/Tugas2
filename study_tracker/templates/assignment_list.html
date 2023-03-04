@@ -27,10 +27,18 @@
     {% endfor %}
   </table>
 
+  <h5>Sesi terakhir login: {{ last_login }}</h5>
+
   <br>
 <a href="{% url 'study_tracker:create_assignment' %}">
     <button>
         Jadwal Baru
+    </button>
+</a>
+
+<a href="{% url 'study_tracker:logout' %}">
+    <button>
+        Logout
     </button>
 </a>
 
