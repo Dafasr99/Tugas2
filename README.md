@@ -1,10 +1,9 @@
-## TUGAS README
+## TUGAS 3 README
 
 ------------
 
 ### link menuju aplikasi Railway yang sudah di-deploy
-- https://study-tracker.up.railway.app/study-tracker/XML 
-- https://study-tracker.up.railway.app/study-tracker/json
+- https://study-tracker.up.railway.app/study-tracker 
 
 ------------
 
@@ -156,6 +155,200 @@ urlpatterns = [
     path('json/<int:id>', show_json_by_id, name='show_json_by_id'), 
 ]
 ```
+------------
+
+## TUGAS 4 README
+
+------------
+
+### Apa kegunaan {% csrf_token %} pada elemen "form" ? Apa yang terjadi apabila tidak ada potongan kode tersebut pada elemen "form" ?
+
+Potongan kode {% csrf_token %} dalam elemen "form" digunakan untuk menambahkan perlindungan Cross-Site Request Forgery (CSRF) ke formulir. CSRF adalah serangan yang mengelabui pengguna untuk melakukan suatu tindakan di situs web tanpa sepengetahuan atau persetujuan mereka. Dengan menambahkan potongan kode {% csrf_token %}, Django menghasilkan token unik yang disertakan dalam data formulir. Ketika formulir dikirimkan, Django memeriksa apakah token tersebut valid untuk memastikan bahwa pengiriman formulir berasal dari situs yang sama dengan formulir tersebut. Jika tidak ada potongan kode {% csrf_token %} dalam elemen "form", maka Django akan memunculkan kesalahan Terlarang (token CSRF tidak ada atau salah) ketika formulir dikirimkan. Hal ini dikarenakan perlindungan CSRF Django mengharuskan setiap form POST menyertakan token CSRF. Oleh karena itu, penting untuk menyertakan potongan kode {% csrf_token %} di setiap form POST dalam aplikasi Django untuk memastikan keamanannya.
+
+------------
+
+### Apakah kita dapat membuat elemen <form> secara manual (tanpa menggunakan generator seperti {{ form.as_table }})? Jelaskan secara gambaran besar bagaimana cara membuat <form> secara manual.
+
+- Untuk membuat form secara manual, kita dapat mendefinisikan sebuah kelas yang diwarisi dari kelas Form milik Django. Dalam kelas ini, kita mendefinisikan bidang yang ingin kita sertakan dalam formulir, bersama dengan aturan validasi yang berlaku untuk setiap bidang. Kita kemudian dapat menginstansiasi objek dari kelas ini dalam fungsi view dan mengopernya ke template untuk di-render.
+
+Langkah-langkah dasar untuk membuat formulir secara manual adalah sebagai berikut:
+
+1. Mengimpor modul formulir dari Django.
+2. Tentukan kelas yang mewarisi dari kelas Form Django.
+3. Di dalam kelas, tentukan bidang yang akan disertakan di dalam formulir menggunakan tipe bidang yang sesuai dari modul formulir Django. Sebagai contoh, untuk membuat field input teks, kita dapat menggunakan tipe field CharField.
+4. Jika diperlukan, tambahkan aturan validasi ke field menggunakan argumen validators.
+5. Instansiasi kelas form dalam fungsi view dan berikan ke konteks template.
+6. Render field form secara manual di dalam template menggunakan tag HTML dan bahasa template Django.
+
+------------
+
+### Jelaskan proses alur data dari submisi yang dilakukan oleh pengguna melalui HTML form, penyimpanan data pada database, hingga munculnya data yang telah disimpan pada template HTML.
+
+1. Pengiriman Formulir HTML: Ketika pengguna mengirimkan formulir, data yang dimasukkan ke dalam bidang formulir dikirim ke server dalam bentuk permintaan HTTP. Permintaan tersebut dikirim ke URL yang ditentukan dalam atribut tindakan elemen formulir.
+
+2. Validasi Sisi Server: Setelah server menerima permintaan, data divalidasi untuk memastikan bahwa data tersebut memenuhi format yang diharapkan dan tidak berbahaya atau berbahaya. Validasi dilakukan dengan menggunakan berbagai teknik seperti ekspresi reguler dan validator formulir bawaan dalam bahasa pemrograman sisi server.
+
+3. Penyimpanan Data: Jika data lolos validasi, maka data tersebut akan disimpan dalam basis data. Data biasanya disimpan dalam format terstruktur, dengan setiap bidang formulir dipetakan ke kolom yang sesuai dalam tabel basis data. Hal ini memungkinkan pencarian, penyortiran, dan kueri data yang efisien.
+
+4. Pengambilan Data yang Tersimpan: Ketika pengguna meminta untuk melihat data, server mengambil data dari database dan menyiapkannya untuk ditampilkan. Hal ini biasanya dilakukan dengan menggunakan bahasa pemrograman sisi server seperti Python atau PHP, yang mengambil data dari database dan memformatnya ke dalam struktur data yang sesuai.
+
+5. Presentasi Data: Setelah data diambil dan diformat, data tersebut kemudian dikirim ke klien untuk ditampilkan dalam template HTML. Template HTML berisi placeholder untuk data yang akan dimasukkan secara dinamis, menggunakan kode sisi server seperti bahasa template Django atau mesin templating PHP.
+
+6. Merender Template HTML: Terakhir, templat HTML dirender oleh browser, yang menggantikan placeholder dengan data yang sebenarnya. Browser kemudian menampilkan data yang telah diformat kepada pengguna dalam bentuk halaman web.
+
+Secara ringkas, proses aliran data dari pengiriman data yang dilakukan oleh pengguna melalui form HTML, penyimpanan data di database, hingga penampilan data yang telah disimpan di template HTML melibatkan beberapa langkah, termasuk pengiriman form, validasi sisi server, penyimpanan data, pengambilan data yang tersimpan, presentasi data, dan rendering template HTML. Setiap langkah sangat penting untuk memastikan bahwa data akurat, aman, dan disajikan dalam format yang sesuai untuk pengguna.
+
+------------
+
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas. ```
+
+- Menjalankan virtual environment terlebih dahulu.
+
+- Membuka views.py yang ada pada folder study_tracker dan buatlah fungsi dengan nama register, login dan logout yang menerima parameter request dan menambahkan import
+
+```
+from django.shortcuts import redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+import datetime
+
+```
+
+- Menambahkan kode program dalam fungsi register, Login dan Logout beserta dengan bonus
+
+```
+def register(request):
+    form = UserCreationForm()
+    
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request,'Akun telah berhasil dibuat!')
+            return redirect('study_tracker:assignment_list')
+        
+    context = {'form': form}
+    return render(request, 'register.html', context)
+
+def login_user(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user is not None:   
+            login(request, user)
+            response = HttpResponseRedirect(reverse('study_tracker:assignment_list'))
+            response.set_cookie('last_login', str(datetime.datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
+            return response
+        else:
+            messages.info(request, 'Username atau Password salah!')
+    context = {}
+    return render(request, 'login.html', context)
+
+def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('study_tracker:assignment_list'))
+    response.delete_cookie('last_login') # menghapus cookie last_login
+    return response
+    
+```
+
+- Membuat berkas html dengan nama register.html
+
+```
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Registrasi Akun</title>
+{% endblock meta %}
+
+{% block content %}  
+
+<div class = "login">
+
+    <h1>Formulir Registrasi</h1>  
+
+        <form method="POST" >  
+            {% csrf_token %}  
+            <table>  
+                {{ form.as_table }}  
+                <tr>  
+                    <td></td>
+                    <td><input type="submit" name="submit" value="Daftar"/></td>  
+                </tr>  
+            </table>  
+        </form>
+
+    {% if messages %}  
+        <ul>   
+            {% for message in messages %}  
+                <li>{{ message }}</li>  
+                {% endfor %}  
+        </ul>   
+    {% endif %}
+
+</div>  
+
+{% endblock content %}
+```
+
+- Mmembuat berkas html dengan nama login.html
+
+```
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class = "login">
+
+    <h1>Login</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Username: </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input class="btn login_btn" type="submit" value="Login"></td>
+            </tr>
+        </table>
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    Belum mempunyai akun? <a href="{% url 'money_tracker:register' %}">Buat Akun</a>
+
+</div>
+
+{% endblock content %}
+```
+- Menambahkan kode yang bertujuan halaman study tracker hanya dapat diakses oleh pengguna yang sudah login (terautentikasi). Apabila pengguna belum terautentikasi, maka aplikasi akan menampilkan halaman login kepada pengguna.
+```
+@login_required(login_url='/money_tracker/login/')
+```
+
 
 
 
