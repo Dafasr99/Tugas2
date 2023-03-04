@@ -4,7 +4,7 @@
 
 ### link menuju aplikasi Railway yang sudah di-deploy
 - https://study-tracker.up.railway.app/study-tracker
-- 
+
 ------------
 
 ### Apakah kita dapat menginput data selain melalui form? Namun mengapa form dapat dikatakan lebih baik daripada menggunakan cara tersebut?
