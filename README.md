@@ -295,7 +295,7 @@ def logout_user(request):
 {% endblock content %}
 ```
 
-- Mmembuat berkas html dengan nama login.html
+- Membuat berkas html dengan nama login.html
 
 ```
 {% extends 'base.html' %}
