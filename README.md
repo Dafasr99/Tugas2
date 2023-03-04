@@ -3,8 +3,8 @@
 ------------
 
 ### link menuju aplikasi Railway yang sudah di-deploy
-- https://study-tracker.up.railway.app/study-tracker/XML 
-- https://study-tracker.up.railway.app/study-tracker/json
+- https://study-tracker.up.railway.app/study-tracker
+- https://study-tracker.up.railway.app/study-tracker
 
 ------------
 
