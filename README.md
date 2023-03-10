@@ -200,7 +200,11 @@ Secara ringkas, proses aliran data dari pengiriman data yang dilakukan oleh peng
 
 ------------
 
+<<<<<<< HEAD
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas. ```
+=======
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas. 
+>>>>>>> 2398df051ddf91c9a67a22622f651c0bc82dc52c
 
 - Menjalankan virtual environment terlebih dahulu.
 
@@ -295,7 +299,11 @@ def logout_user(request):
 {% endblock content %}
 ```
 
+<<<<<<< HEAD
 - Mmembuat berkas html dengan nama login.html
+=======
+- Membuat berkas html dengan nama login.html
+>>>>>>> 2398df051ddf91c9a67a22622f651c0bc82dc52c
 
 ```
 {% extends 'base.html' %}
@@ -349,7 +357,13 @@ def logout_user(request):
 @login_required(login_url='/money_tracker/login/')
 ```
 
+<<<<<<< HEAD
 ## TUGAS 5 README
+=======
+
+
+
+>>>>>>> 2398df051ddf91c9a67a22622f651c0bc82dc52c
 
 
 
