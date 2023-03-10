@@ -349,9 +349,7 @@ def logout_user(request):
 @login_required(login_url='/money_tracker/login/')
 ```
 
-
-
-
+## TUGAS 5 README
 
 
 

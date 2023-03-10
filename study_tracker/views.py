@@ -69,6 +69,27 @@ def create_assignment(request):
     context = {'form': form}
     return render(request, 'create_assignment.html', context)
 
+def modify_assignment(request, id):
+    assignment = Assignment.objects.get(pk=id)
+    form = AssignmentForm(request.POST or None, instance=assignment)
+    
+    if form.is_valid() and request.method == "POST":
+        print("form is valid")
+        form.save()
+        return HttpResponseRedirect(reverse('study_tracker:assignment_list'))
+    
+    context = {'form': form}
+    return render(request, 'modify_assignment.html', context)
+
+def delete_assignment(request, id):
+    
+     assignment = Assignment.objects.get(pk=id)
+     
+     assignment.delete()
+     
+     return HttpResponseRedirect(reverse('study_tracker:assignment_list'))
+    
+    
 def show_xml(request):
     data = Assignment.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
