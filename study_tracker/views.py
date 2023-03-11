@@ -30,7 +30,6 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            user = form.cleaned_data.get('username')
             messages.success(request,'Akun telah berhasil dibuat!')
             return redirect('study_tracker:assignment_list')
         

@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 
 {% block meta %}
+{% endblock meta %}
 
 <html lang="en">
     
@@ -11,71 +12,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Jadwal Baru</title>
-    <style>
-        body {
-            background-color: #f4f4f4;
-            font-family: Arial, sans-serif;
-            color: #444;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        h1 {
-            text-align: center;
-            margin-top: 50px;
-        }
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
-            border-radius: 10px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            width: 150px;
-            font-weight: normal;
-        }
-        input[type="text"],
-        select,
-        input[type="date"],
-        textarea,
-        input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            background-color: #ADD8E6;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        input[type="submit"] {
-            background-color: #0000ff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        input[type="submit"]:hover {
-            background-color: #006CBA;
-        }
-    </style>
+    
 </head>
 
-{% endblock meta %}
-
 {% block content %}
+
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+        color: #444;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        text-align: center;
+        margin-top: 50px;
+    }
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+        border-radius: 10px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        width: 150px;
+        font-weight: normal;
+    }
+    input[type="text"],
+    select,
+    input[type="date"],
+    textarea,
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #ADD8E6;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    input[type="submit"] {
+        background-color: #0000ff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    input[type="submit"]:hover {
+        background-color: #006CBA;
+    }
+</style>
 
 <body>
     <h1>Tambah Jadwal Baru</h1>
@@ -132,6 +133,7 @@
                     <td> 
                         <input type="submit" value="Tambah"/>
                     </td>
+                    
                 </tr>
                 
                 {% endblock content %} 

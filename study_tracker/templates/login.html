@@ -1,89 +1,90 @@
 {% extends 'base.html' %}
 
-<!DOCTYPE html>
-
 {% block meta %}
-
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Login</title>
-
-    <style>
-        /* Add styles to the body */
-        body {
-            background-color: #F4F4F4;
-        }
-        
-        /* Add styles to the login container */
-        .login {
-            
-            max-width: 400px;
-            margin: 0 auto;
-            margin-top: 100px;
-            background-color: #FFF;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 10px #CCC;
-        }
-        .login:hover{
-            box-shadow: 
-                0 0 20px rgba(0, 0, 255, 0.5), 
-                0 0 40px rgba(0, 0, 128, 0.5),
-                0 0 60px rgba(0, 255, 255, 0.5);
-            transition: 0.5s;
-        }
-        
-        /* Add styles to the form elements */
-        input[type="text"],
-        input[type="password"],
-        input[type="submit"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 3px;
-            border: none;
-        }
-        
-        input[type="submit"] {
-            background-color: #0000FF;
-            color: #FFF;
-            cursor: pointer;
-        }
-        
-        /* Add styles to the links */
-        a {
-            color: #4CAF50;
-        }
-    </style>
-    
-</head>
-
+<title>Login</title>
 {% endblock meta %}
 
 {% block content %}
 
-<body>
-    <div class="login">
-        <h1>Login</h1>
-        <form method="POST" action="">
-            {% csrf_token %}
-            <label for="username">Username:</label>
-            <input type="text" name="username" placeholder="Enter username" required>
+<style>
+    /* Add styles to the body */
+    body {
+        background-color: #F4F4F4;
+    }
+    
+    /* Add styles to the login container */
+    .login {
+        
+        max-width: 400px;
+        margin: 0 auto;
+        margin-top: 100px;
+        background-color: #FFF;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px #CCC;
+    }
+    .login:hover{
+        box-shadow: 
+            0 0 20px rgba(0, 0, 255, 0.5), 
+            0 0 40px rgba(0, 0, 128, 0.5),
+            0 0 60px rgba(0, 255, 255, 0.5);
+        transition: 0.5s;
+    }
+    
+    .button {
+        border: none;
+        color: white;
+        font-weight: bold;
+        background-color: #6200EE;
+        text-decoration: none;
+        padding: 5px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 6px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 10px 15px 0 rgba(0,0,0,0.19);
+    }
+    
+    
+    /* Add styles to the links */
+    a {
+        color: #4CAF50;
+    }
+</style>
 
-            <label for="password">Password:</label>
-            <input type="password" name="password" placeholder="Enter password" required>
+<div class = "login">
 
-            <input type="submit" class = "submit" value="Login">
-        </form>
-        <p>Belum mempunyai akun? <a href="/study-tracker/register/">Buat Akun</a></p>
-    </div>
-</body>
-</html>
+    <h1>Login</h1>
 
-{% endblock content %} 
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Username: </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
 
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input class="btn login_btn button" type="submit" value="Login"></td>
+            </tr>
+        </table>
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    Belum mempunyai akun? <a href="{% url 'study_tracker:register' %}">Buat Akun</a>
+
+</div>
+
+{% endblock content %}
