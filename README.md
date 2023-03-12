@@ -295,11 +295,7 @@ def logout_user(request):
 {% endblock content %}
 ```
 
-<<<<<<< HEAD
 - Mmembuat berkas html dengan nama login.html
-=======
-- Membuat berkas html dengan nama login.html
->>>>>>> 2398df051ddf91c9a67a22622f651c0bc82dc52c
 
 ```
 {% extends 'base.html' %}
@@ -349,17 +345,12 @@ def logout_user(request):
 {% endblock content %}
 ```
 - Menambahkan kode yang bertujuan halaman study tracker hanya dapat diakses oleh pengguna yang sudah login (terautentikasi). Apabila pengguna belum terautentikasi, maka aplikasi akan menampilkan halaman login kepada pengguna.
+
 ```
 @login_required(login_url='/money_tracker/login/')
 ```
 
-<<<<<<< HEAD
 ## TUGAS 5 README
-=======
-
-
-
->>>>>>> 2398df051ddf91c9a67a22622f651c0bc82dc52c
 
 
 
