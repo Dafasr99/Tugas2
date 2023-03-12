@@ -83,11 +83,8 @@ def modify_assignment(request, id):
 def delete_assignment(request, id):
     
      assignment = Assignment.objects.get(pk=id)
-     
      assignment.delete()
-     
      return HttpResponseRedirect(reverse('study_tracker:assignment_list'))
-    
     
 def show_xml(request):
     data = Assignment.objects.all()

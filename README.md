@@ -200,11 +200,7 @@ Secara ringkas, proses aliran data dari pengiriman data yang dilakukan oleh peng
 
 ------------
 
-<<<<<<< HEAD
-### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas. ```
-=======
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas. 
->>>>>>> 2398df051ddf91c9a67a22622f651c0bc82dc52c
 
 - Menjalankan virtual environment terlebih dahulu.
 
