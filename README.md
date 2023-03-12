@@ -3,7 +3,7 @@
 ------------
 
 ### link menuju aplikasi Railway yang sudah di-deploy
-- https://study-tracker.up.railway.app/study-tracker 
+- https://compfest.link/Study-Tracker_Anandafa_2106655040
 
 ------------
 
@@ -213,7 +213,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 import datetime
-
 ```
 
 - Menambahkan kode program dalam fungsi register, Login dan Logout beserta dengan bonus
@@ -253,7 +252,6 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('study_tracker:assignment_list'))
     response.delete_cookie('last_login') # menghapus cookie last_login
     return response
-    
 ```
 
 - Membuat berkas html dengan nama register.html
@@ -295,7 +293,7 @@ def logout_user(request):
 {% endblock content %}
 ```
 
-- Mmembuat berkas html dengan nama login.html
+- Membuat berkas html dengan nama login.html
 
 ```
 {% extends 'base.html' %}
@@ -347,7 +345,7 @@ def logout_user(request):
 - Menambahkan kode yang bertujuan halaman study tracker hanya dapat diakses oleh pengguna yang sudah login (terautentikasi). Apabila pengguna belum terautentikasi, maka aplikasi akan menampilkan halaman login kepada pengguna.
 
 ```
-@login_required(login_url='/money_tracker/login/')
+@login_required(login_url='/study-tracker/login/')
 ```
 
 ## TUGAS 5 README
