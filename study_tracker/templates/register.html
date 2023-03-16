@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-<title>Registrasi Akun</title>
+
 {% endblock meta %}
 
 {% block content %}  
@@ -44,11 +44,10 @@
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 10px 15px 0 rgba(0,0,0,0.19);
     }
     
-    
-    /* Add styles to the links */
     a {
         color: #4CAF50;
     }
+
 </style>
 
 <div class = "login">
@@ -65,15 +64,6 @@
                 </tr>  
             </table>  
         </form>
-
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
-    {% endif %}
-
 </div>  
 
 {% endblock content %}

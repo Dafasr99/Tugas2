@@ -8,6 +8,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 import datetime
 
 @login_required(login_url='/study-tracker/login/')
@@ -67,6 +68,31 @@ def create_assignment(request):
     
     context = {'form': form}
     return render(request, 'create_assignment.html', context)
+
+
+@csrf_exempt
+def create_assignment_ajax(request):
+# create object of form
+    form = AssignmentForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        data = Assignment.objects.last()
+
+        # parsing the form data into json
+        result = {
+            'id':data.id,
+            'name':data.name,
+            'subject':data.subject,
+            'type':data.type,
+            'date':data.date,
+            'progress':data.progress,
+            'description':data.description,
+        }
+        return JsonResponse(result)
+
+    context = {'form': form}
+    return render(request, "create_assignment.html", context)
 
 def modify_assignment(request, id):
     assignment = Assignment.objects.get(pk=id)

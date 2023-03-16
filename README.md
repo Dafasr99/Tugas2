@@ -347,8 +347,59 @@ def logout_user(request):
 ```
 @login_required(login_url='/study-tracker/login/')
 ```
-
+-----
 ## TUGAS 5 README
+-----
+### Apa perbedaan dari inline, internal, dan external CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?
+
+Inline CSS merujuk pada kode CSS yang ditulis langsung ke dalam elemen HTML menggunakan atribut “style”. Internal CSS adalah kode CSS yang ditempatkan di bagian “head” dari dokumen HTML menggunakan tag “style”. External CSS adalah file terpisah yang berisi semua kode CSS dan ditautkan ke dokumen HTML menggunakan tag “link”.
+
+Keuntungan dari inline CSS adalah memungkinkan perubahan gaya yang cepat dan mudah pada elemen individu, karena kode CSS ada di sana dalam kode HTML. Namun, bisa sulit untuk menjaga konsistensi dan organisasi dengan inline CSS, terutama dalam proyek yang lebih besar.
+
+Keuntungan dari internal CSS adalah memungkinkan gaya yang lebih terorganisir dan terpusat, karena semua kode CSS ada di satu tempat di bagian “head” dari dokumen HTML. Namun, masih bisa sulit untuk menjaga konsistensi dan skalabilitas dengan internal CSS, terutama dalam proyek yang lebih besar.
+
+Keuntungan dari external CSS adalah memungkinkan pemisahan antara struktur HTML dan gaya CSS, yang dapat sangat meningkatkan kemampuan pemeliharaan dan skalabilitas dalam proyek yang lebih besar. Selain itu, external CSS dapat di-cache oleh browser, menghasilkan waktu pemuatan yang lebih cepat pada kunjungan berikutnya. Namun, mungkin memerlukan permintaan HTTP tambahan, yang dapat sedikit meningkatkan waktu pemuatan pada kunjungan pertama.
+
+Singkatnya, pilihan antara inline, internal dan external CSS tergantung pada ukuran dan kompleksitas proyek serta kebutuhan spesifik pengembang. Inline CSS cepat dan mudah tetapi dapat menyebabkan ketidakberesan; internal CSS lebih terpusat tetapi masih sulit dipelihara dalam proyek yang lebih besar; dan external CSS memungkinkan pemisahan perhatian tetapi mungkin memerlukan permintaan HTTP tambahan.
+
+-----
+### Jelaskan tag HTML5 yang kamu ketahui.
+Pertama-tama, HTML5 adalah versi terbaru dari HTML, dengan perbedaan utama adalah bahwa HTML5 mencakup elemen baru yang tidak ada dalam HTML. Elemen-elemen baru ini memberikan makna semantik yang lebih pada konten dan memudahkan mesin pencari untuk mengindeks dan memahami konten halaman web.
+
+Kedua, HTML5 mencakup kontrol formulir baru, seperti pemilih tanggal dan penggeser rentang, yang memberikan pengalaman pengguna yang lebih baik dan mengurangi kebutuhan akan JavaScript atau plugin lainnya.
+
+Ketiga, HTML5 mencakup sejumlah API yang memungkinkan pengembang untuk mengakses fitur perangkat keras dan perangkat lunak, seperti geolokasi, kamera, dan mikrofon tanpa perlu plugin atau perangkat lunak tambahan.
+
+Terakhir, HTML5 mencakup dukungan yang lebih baik untuk multimedia dengan kemampuan untuk memutar video dan audio secara native tanpa perlu plugin tambahan.
+
+Singkatnya, HTML5 adalah versi terbaru dari HTML yang mencakup elemen baru kontrol formulir API dan dukungan multimedia menjadikannya bahasa markup yang lebih canggih dan kaya fitur untuk pengembangan web.
+
+-----
+### Jelaskan tipe-tipe CSS selector yang kamu ketahui.
+
+Selector CSS adalah pola yang digunakan untuk memilih dan mengatur gaya elemen HTML. Selector mendefinisikan elemen HTML mana yang akan diatur gayanya dan bagaimana gaya tersebut diatur. Selector CSS dapat digunakan untuk menargetkan elemen berdasarkan atribut, kelas, ID, atau hubungan mereka dengan elemen lain dalam struktur dokumen.
+
+Berikut adalah beberapa contoh selector CSS:
+
+1. Type selector: memilih semua elemen dengan jenis tertentu, seperti <h1>, <p>, atau <div>.
+
+2. ID selector: memilih elemen dengan atribut ID tertentu, seperti <div id="header">.
+
+3. Class selector: memilih elemen dengan atribut kelas tertentu, seperti <div class="container">.
+
+4. Attribute selector: memilih elemen berdasarkan atributnya, seperti <a href="https://example.com">.
+
+5. Descendant selector: memilih elemen yang merupakan turunan dari elemen lain, seperti <div> dalam <body>.
+
+6. Child selector: memilih elemen anak langsung dari elemen induk, seperti anak <ul> <li>.
+
+7. Pseudo-class selector: memilih elemen berdasarkan keadaan mereka, seperti <a:hover>.
+
+Selector CSS memungkinkan pengembang untuk membuat aturan khusus untuk bagian-bagian yang berbeda dari halaman web mereka, sehingga lebih mudah untuk mengatur dan memelihara. Dengan menggunakan selector, pengembang dapat menargetkan elemen tertentu atau kelompok elemen dan menerapkan gaya pada mereka, tanpa memengaruhi bagian lain dari halaman.
+
+-----
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
+
 
 
 
