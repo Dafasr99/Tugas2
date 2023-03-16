@@ -13,6 +13,6 @@ class Assignment(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=20, choices=TYPE_CHOICES)
     subject = models.CharField(max_length=100)
-    date = models.DateTimeField()
+    date = models.DateTimeField(auto_now_add=True)
     progress = models.IntegerField()
     description = models.TextField()

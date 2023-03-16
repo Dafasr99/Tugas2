@@ -1,52 +1,138 @@
 {% extends 'base.html' %}
 
-{% load static %}
+<!DOCTYPE html>
+
+{% block meta %}
+{% endblock meta %}
+
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Jadwal Baru</title>
+    
+</head>
 
 {% block content %}
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 mx-auto mt-5">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="text-center">Tambah Jadwal Baru</h3>
-        </div>
-        <div class="card-body">
-          <form method="POST">
-            {% csrf_token %}
-            <div class="form-group">
-              <label for="{{ form.name.id_for_label }}">Nama:</label>
-              {{ form.name }}
-            </div>
-            <div class="form-group">
-              <label for="{{ form.subject.id_for_label }}">Jenis:</label>
-              {{ form.subject }}
-            </div>
-            <div class="form-group">
-              <label for="{{ form.type.id_for_label }}">Type:</label>
-              {{ form.type }}
-            </div>
-            <div class="form-group">
-              <label for="{{ form.date.id_for_label }}">Tanggal:</label>
-              {{ form.date }}
-            <div class="form-group">
-              <label for="{{ form.progress.id_for_label }}">Progress:</label>
-              {{ form.progress }}
-            </div>
-            <div class="form-group">
-              <label for="{{ form.description.id_for_label }}">Deskripsi:</label>
-              {{ form.description }}
-            </div>
-            <div class="form-group">
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Tambah Tugas</button>
-                </div>                
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<style>
+    body {
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+        color: #444;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        text-align: center;
+        margin-top: 50px;
+    }
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
+        border-radius: 10px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+    th {
+        width: 150px;
+        font-weight: normal;
+    }
+    input[type="text"],
+    select,
+    input[type="date"],
+    textarea,
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #ADD8E6;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    input[type="submit"] {
+        background-color: #0000ff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    input[type="submit"]:hover {
+        background-color: #006CBA;
+    }
+</style>
 
-{% endblock %}
+<body>
+    <h1>Tambah Jadwal Baru</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th><label for="id_name">Name:</label></th>
+                <td>
+                    <input type="text" name="name" maxlength="100" required="" id="id_name">
+                </td>
+            </tr>
+            <tr>
+                <th><label for="id_type">Type:</label></th>
+                <td>
+                    <select name="type" required="" id="id_type">
+                        <option selected value="Tugas Harian">Tugas Harian</option>
+                        <option value="Tugas Kelompok">Tugas Kelompok</option>
+                        <option value="Tugas Mandiri">Tugas Mandiri</option>
+                        <option value="Tugas Praktikum">Tugas Praktikum</option>
+                        <option value="Tugas Akhir">Tugas Akhir</option>
+                        <option value="Ujian">Ujian</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="id_subject">Subject:</label></th>
+                <td>
+                    <input type="text" name="subject" maxlength="100" required="" id="id_subject">
+                </td>
+            </tr>
+            <tr>
+                <th><label for="id_date">Date:</label></th>
+                <td>
+                    <input type="date" name="date" required="" id="id_date">
+                </td>
+                </tr>
+                <tr>
+                    <th><label for="id_progress">Progress:</label></th>
+                    <td>
+                        <input type="number" name="progress" required="" id="id_progress">
+                    </td>
+                </tr>
+                <tr>
+                    <th><label for="id_description">Description:</label></th>
+                    <td>
+                        <textarea name="description" cols="40" rows="10" required="" id="id_description"></textarea>
+                    </td> 
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td> 
+                        <input type="submit" value="Tambah"/>
+                    </td>
+                    
+                </tr>
+                
+                {% endblock content %} 

@@ -6,6 +6,5 @@ class AssignmentForm(ModelForm):
  
     class Meta:
         model = Assignment
-        fields = ['name', 'type', 'subject', 'date', 'progress', 'description']
+        fields = ['name', 'type', 'subject', 'progress', 'description']
         
-    date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
