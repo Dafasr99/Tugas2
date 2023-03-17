@@ -380,7 +380,7 @@ Singkatnya, HTML5 adalah versi terbaru dari HTML yang mencakup elemen baru kontr
 Selector CSS adalah pola yang digunakan untuk memilih dan mengatur gaya elemen HTML. Selector mendefinisikan elemen HTML mana yang akan diatur gayanya dan bagaimana gaya tersebut diatur. Selector CSS dapat digunakan untuk menargetkan elemen berdasarkan atribut, kelas, ID, atau hubungan mereka dengan elemen lain dalam struktur dokumen.
 
 Berikut adalah beberapa contoh selector CSS:
-
+```
 1. Type selector: memilih semua elemen dengan jenis tertentu, seperti <h1>, <p>, atau <div>.
 
 2. ID selector: memilih elemen dengan atribut ID tertentu, seperti <div id="header">.
@@ -394,14 +394,150 @@ Berikut adalah beberapa contoh selector CSS:
 6. Child selector: memilih elemen anak langsung dari elemen induk, seperti anak <ul> <li>.
 
 7. Pseudo-class selector: memilih elemen berdasarkan keadaan mereka, seperti <a:hover>.
-
+```
 Selector CSS memungkinkan pengembang untuk membuat aturan khusus untuk bagian-bagian yang berbeda dari halaman web mereka, sehingga lebih mudah untuk mengatur dan memelihara. Dengan menggunakan selector, pengembang dapat menargetkan elemen tertentu atau kelompok elemen dan menerapkan gaya pada mereka, tanpa memengaruhi bagian lain dari halaman.
 
 -----
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
+### Menambahkan button ubah dan hapus untuk memperbarui data tugas.
+### button ubah
+- Membuat fungsi baru dengan nama modify_assignment yang menerima parameter request dan id pada views.py di folder study_tracker untuk melakukan perbaruan data transaksi. 
+```
+def modify_assignment(request, id):
+    assignment = Assignment.objects.get(pk=id)
+    form = AssignmentForm(request.POST or None, instance=assignment)
+    
+    if form.is_valid() and request.method == "POST":
+        print("form is valid")
+        form.save()
+        return HttpResponseRedirect(reverse('study_tracker:assignment_list'))
+    
+    context = {'form': form}
+    return render(request, 'modify_assignment.html', context)
+```
+Membuka urls.py yang ada pada folder study_tracker dan impor fungsi yang sudah dibuat tadi.
+```
+from study_tracker.views import modify_assignment
+```
+Menambahkan path url ke dalam urlpatterns untuk mengakses fungsi yang sudah diimpor tadi.
+```
+path('modify/<int:id>', modify_assignment, name='modify_assignment'),
+```
+Membuat sebuah berkas baru pada folder study_tracker/templates dengan nama modify_transaction.html.
+```
+{% extends 'base.html' %}
 
+{% load static %}
 
+{% block content %}
 
+<h1>Ubah Data Tugas</h1>
 
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Ubah"/>
+            </td>
+        </tr>
+    </table>
+</form>
 
+{% endblock %}
+```
+Membuka berkas assignment_list.html yang ada pada folder study_tracker/templates dan ubahlah kode
+```
+<a href="/study-tracker/modify/${result.id}" class="btn btn-secondary mb-2">Ubah</a>
+```
+### button hapus
+- Membuat fungsi baru dengan nama delete_assignment yang menerima parameter request dan id pada views.py di folder study_tracker untuk melakukan perbaruan data transaksi. 
+```
+def delete_assignment(request, id):
+    
+     assignment = Assignment.objects.get(pk=id)
+     assignment.delete()
+     return HttpResponseRedirect(reverse('study_tracker:assignment_list'))
+```
+- Membuka urls.py yang ada pada folder study_tracker dan impor fungsi yang sudah dibuat tadi.
+```
+from study_tracker.views import delete_assignment
+```
+- Menambahkan path url ke dalam urlpatterns untuk mengakses fungsi yang sudah diimpor tadi.
+```
+path('delete/<int:id>', delete_assignment, name='delete_assignment'),
+```
+- Membuka berkas assignment_list.html yang ada pada folder study_tracker/templates dan ubahlah kode
+```
+<a href="/study-tracker/delete/${result.id}" class="btn btn-primary delete mb-2">Hapus</a>
+```
 
+### Berikut link Study Tracker yang sudah di deploy
+https://compfest.link/StudyTracker_DAFASR
+
+### Kustomisasi templat untuk halaman login, register, dan add tugas 
+Kustomisasi Halaman-halaman tersebut dengan menambahkan 
+### Contoh
+```
+<style>
+.form-style {
+          padding: 13px 20px;
+          padding-left: 55px;
+          height: 48px;
+          width: 100%;
+          font-weight: 500;
+          border-radius: 4px;
+          font-size: 14px;
+          line-height: 22px;
+          letter-spacing: 0.5px;
+          outline: none;
+          color: #c4c3ca;
+          background-color: #1f2029;
+          border: none;
+          -webkit-transition: all 200ms linear;
+          transition: all 200ms linear;
+          box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
+        }
+</style>
+```
+
+### Kustomisasi halaman utama study tracker menggunakan cards (satu card berisi satu tugas).
+Dengan menggunakan class Cards
+```
+<div class="card d-flex">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">${data[i].fields.name}</h5>
+                  <p class="card-text">${data[i].fields.subject}</p>
+                  <p class="card-text">${data[i].fields.type}</p>
+                  <p class="card-text date">${data[i].fields.date}</p>
+                  <p class="card-text">${data[i].fields.progress}</p>
+                  <p class="card-text">${data[i].fields.description}</p>
+                  <div class="mt-auto">
+                    <a href="/study-tracker/delete/${data[i].pk}" class="btn btn-primary delete mb-2">Hapus</a>
+                    <a href="/study-tracker/modify/${data[i].pk}" class="btn btn-secondary mb-2">Ubah</a>
+                  </div>
+                </div>
+              </div>
+```
+
+untuk menampilkan atau resultnya
+```
+<div id="${result.id}--task" class="col-md-6 col-lg-3 mb-3">
+              <div class="card d-flex">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">${result.name}</h5>
+                  <p class="card-text">${result.subject}</p>
+                  <p class="card-text">${result.type}</p>
+                  <p class="card-text date">${result.date}</p>
+                  <p class="card-text">${result.progress}</p>
+                  <p class="card-text">${result.description}</p>
+                  <div class="mt-auto">
+                    <a href="/study-tracker/delete/${result.id}" class="btn btn-primary delete mb-2">Hapus</a>
+                    <a href="/study-tracker/modify/${result.id}" class="btn btn-secondary mb-2">Ubah</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+```
