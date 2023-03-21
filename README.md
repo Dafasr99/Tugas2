@@ -541,3 +541,246 @@ untuk menampilkan atau resultnya
               </div>
             </div>
 ```
+-----
+## TUGAS 6 README
+-----
+### Jelaskan perbedaan antara asynchronous programming dengan synchronous programming.
+Asynchronous programming adalah proses jalannya program yang bisa dilakukan secara bersamaan tanpa harus menunggu proses antrian. Sedangkan synchronous programming melakukan eksekusi secara berurutan dan umumnya function 1 harus benar-benar selesai baru melakukan eksekusi function 2 dan seterusnya. Asynchronous programming merupakan sebuah pendekatan pemrograman yang tidak terikat pada input output (I/O) protocol. Ini menandakan bahwa pemrograman asynchronous tidak melakukan pekerjaannya secara old style / cara lama yaitu dengan eksekusi baris program satu persatu secara hirarki. Keuntungan dari asynchronous programming adalah ia bersifat multi-thread, yang berarti operasi atau program dapat berjalan secara paralel. Asynchronous juga bersifat non-blocking, yang berarti ia akan mengirimkan beberapa permintaan ke server
+
+Referensi: 
+
+- https://community.algostudio.net/memahami-synchronous-dan-asynchronous-dalam-pemrograman/
+- https://wandercom.id/read/kenali-perbedaan-asynchronous-dan-synchronous-di-pemrograman/
+- https://binus.ac.id/malang/2022/05/asynchronous-vs-synchronous-programming/
+- https://www.mendix.com/blog/asynchronous-vs-synchronous-programming/ 
+----
+### Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini.
+Event-driven programming adalah pendekatan pemrograman di mana alur eksekusi program ditentukan oleh kejadian (event) seperti input pengguna atau perubahan data. Dalam event-driven programming, kode tidak dieksekusi secara berurutan dari atas ke bawah, melainkan dipicu oleh event tertentu. Dalam konteks JavaScript dan AJAX, event-driven programming memungkinkan aplikasi web untuk merespons secara dinamis terhadap interaksi pengguna dan perubahan data tanpa harus memuat ulang halaman secara keseluruhan.
+
+Referensi:
+
+- Introduction to events” dari Mozilla Developer Network (MDN)
+- Ajax - Developer guides” dari Mozilla Developer Network (MDN)
+- Event-driven application design with JavaScript” dari O’Reilly
+----
+### Jelaskan penerapan asynchronous programming pada AJAX.
+AJAX adalah singkatan dari Asynchronous JavaScript and XML yang memungkinkan Anda untuk mengambil konten dari server back-end secara tidak sinkron, tanpa perlu merefresh halaman. Dengan menggunakan AJAX, maka memungkinkan Anda sebagai penggunanya untuk memperbarui konten halaman web tanpa memuat ulang atau reload. AJAX dapat digunakan untuk mengirim pesan ke server lalu mengambil hasil data dari server ke browser. Prinsip yang dikerjakan pun adalah asynchronous. Jadi, selama proses mengirim pesan terjadi, browser bisa tetap terus digunakan sambil menunggu respon dari server.
+
+Referensi:
+
+- https://qwords.com/blog/ajax-adalah/
+- https://www.niagahoster.co.id/blog/ajax-javascript/
+
+----
+### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.
+- mengimport JsonResponse dari django.httpdan csrf_exempt dari django.views.decorators.csrf ke dalam file views.py
+- Mmebuat fungsi baru dengan nama create_assignment_ajax yang menerima parameter request pada file study_tracker/views.py.
+- Menambahkan kode dibawah ini:
+```
+@csrf_exempt
+def create_assignment_ajax(request):
+# create object of form
+    form = AssignmentForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        data = Assignment.objects.last()
+
+        # parsing the form data into json
+        result = {
+            'id':data.id,
+            'name':data.name,
+            'subject':data.subject,
+            'type':data.type,
+            'date':data.date,
+            'progress':data.progress,
+            'description':data.description,
+        }
+        return JsonResponse(result)
+
+context = {'form': form}
+return render(request, "create_assignment.html", context)
+```
+
+- Mengimport fucntion yang telah dibuat
+```
+from study_tracker.views import create_assignment_ajax
+```
+
+- Menambahkan path
+```
+path('create-ajax/', create_assignment_ajax, name='create_assignment_ajax'),
+```
+
+- Memodifikasi file study_tracker/assignment_list.html dengan kode baru berikut ini agar dapat menambahkan data baru dengan AJAX.
+```
+{% extends 'base.html' %}
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+```
+
+- Menambahkan potongan kode berikut untuk menampilkan data transaksi dalam bentuk cards.
+```
+<script>
+  $(document).ready(function () {
+    $.get("/study-tracker/json/", function (data) {
+      for (i = 0; i < data.length; i++) {
+        $("#study-tracker").append(`
+            <div id="${data[i].id}--task" class="col-md-6 col-lg-3 mb-3">
+              <div class="card d-flex">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">${data[i].fields.name}</h5>
+                  <p class="card-text">${data[i].fields.subject}</p>
+                  <p class="card-text">${data[i].fields.type}</p>
+                  <p class="card-text date">${data[i].fields.date}</p>
+                  <p class="card-text">${data[i].fields.progress}</p>
+                  <p class="card-text">${data[i].fields.description}</p>
+                  <div class="mt-auto">
+                    <a href="/study-tracker/delete/${data[i].pk}" class="btn btn-primary delete mb-2">Hapus</a>
+                    <a href="/study-tracker/modify/${data[i].pk}" class="btn btn-secondary mb-2">Ubah</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            `)
+      }
+    });
+```
+
+- Menambahkan kode berikut untuk membuat sebuah modal popup yang berfungsi untuk menambahkan tugas baru pada laman study tracker
+```
+<body>
+  <!-- Tugas -->
+  <div
+    class="modal"
+    id="createModal"
+    tabindex="-1"
+    aria-labelledby="createModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel">Tambah Tugas</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cancel"></button>
+        </div>
+        <div class="modal-body">
+          {% csrf_token %}
+          <label for="name" class="form-label">Nama Tugas:</label><br>
+          <input type="text" id="name" class="form-control" name="name" placeholder="Tugas Lab"/><br>
+
+          <label for="type" class="form-label">Jenis Tugas:</label>
+          <select name="type" id="type" class="form-select" aria-label="Default select example">
+            <option selected value="Tugas Harian">Tugas Harian</option>
+            <option value="Tugas Kelompok">Tugas Kelompok</option>
+            <option value="Tugas Mandiri">Tugas Mandiri</option>
+            <option value="Tugas Praktikum">Tugas Praktikum</option>
+            <option value="Tugas Akhir">Tugas Akhir</option>
+            <option value="Ujian">Ujian</option>
+          </select>
+          <br>
+          <label for="subject" class="form-label">Mata Kuliah:</label><br />
+          <input
+            type="text"
+            id="subject"
+            class="form-control"
+            name="subject"
+            placeholder="Pemrograman Berbasis Platform"
+          /><br />
+
+          <label for="progress" class="form-label">Progress:</label><br />
+          <input
+            type="number"
+            id="progress"
+            class="form-control"
+            name="progress"
+            placeholder="50"
+          /><br />
+          <label for="description" class="form-label"
+            >Deskripsi Tugas:</label
+          ><br />
+          <input
+            type="text"
+            id="description"
+            class="form-control"
+            name="description"
+            placeholder="Dikerjakan bersama-sama"
+          /><br />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <button
+            id="submit_btn"
+            type="button"
+            class="btn btn-primary create"
+            id="add-task"
+            data-bs-dismiss="modal"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<div class="row m-2" id="study-tracker"></div>
+
+<br />
+```
+
+- Membuat fungsi pada tombol submit modal agar dapat menambahkan data transaksi secara asinkronus.
+```
+
+    $("#submit_btn").click(function () {
+      $.post("/study-tracker/create-ajax/", {
+        name: $("#name").val(),
+        subject: $("#subject").val(),
+        type: $("#type").val(),
+        progress: $("#progress").val(),
+        description: $("#description").val(),
+      },
+      function (result, status) {
+        if (status == "success") {
+          console.log($("#name").val())
+          console.log($("#subject").val())
+          console.log($("#type").val())
+          console.log($("#progress").val())
+          console.log($("#description").val())
+          $("#study-tracker").append(`
+            <div id="${result.id}--task" class="col-md-6 col-lg-3 mb-3">
+              <div class="card d-flex">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">${result.name}</h5>
+                  <p class="card-text">${result.subject}</p>
+                  <p class="card-text">${result.type}</p>
+                  <p class="card-text date">${result.date}</p>
+                  <p class="card-text">${result.progress}</p>
+                  <p class="card-text">${result.description}</p>
+                  <div class="mt-auto">
+                    <a href="/study-tracker/delete/${result.id}" class="btn btn-primary delete mb-2">Hapus</a>
+                    <a href="/study-tracker/modify/${result.id}" class="btn btn-secondary mb-2">Ubah</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `);
+          $("#name").val('')
+          $("#subject").val('')
+          $("#type").val('')
+          $("#progress").val('')
+          $("#description").val('')
+          } 
+        })
+          
+      })
+    })
+  </script>
+```
