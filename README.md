@@ -562,6 +562,11 @@ Referensi:
 - Introduction to events” dari Mozilla Developer Network (MDN)
 - Ajax - Developer guides” dari Mozilla Developer Network (MDN)
 - Event-driven application design with JavaScript” dari O’Reilly
+
+```
+Dalam tugas ini, event-driven programming digunakan dalam dua fungsi yaitu $.get() dan $("submit_btn").click(). Fungsi $.get() akan dieksekusi ketika halaman telah selesai dimuat dan berhasil mengambil data dari /study-tracker/json melalui AJAX. Sementara itu, fungsi $("submit_btn").click() akan dieksekusi ketika tombol "add" pada form modal ditekan dan berhasil menambahkan data tugas baru ke /study-tracker/create-ajax/ melalui AJAX.
+```
+
 ----
 ### Jelaskan penerapan asynchronous programming pada AJAX.
 AJAX adalah singkatan dari Asynchronous JavaScript and XML yang memungkinkan Anda untuk mengambil konten dari server back-end secara tidak sinkron, tanpa perlu merefresh halaman. Dengan menggunakan AJAX, maka memungkinkan Anda sebagai penggunanya untuk memperbarui konten halaman web tanpa memuat ulang atau reload. AJAX dapat digunakan untuk mengirim pesan ke server lalu mengambil hasil data dari server ke browser. Prinsip yang dikerjakan pun adalah asynchronous. Jadi, selama proses mengirim pesan terjadi, browser bisa tetap terus digunakan sambil menunggu respon dari server.
