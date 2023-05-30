@@ -9,6 +9,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+import json
 import datetime
 
 @login_required(login_url='/study-tracker/login/')
@@ -105,6 +106,25 @@ def modify_assignment(request, id):
     
     context = {'form': form}
     return render(request, 'modify_assignment.html', context)
+
+@csrf_exempt
+def create_assignment_flutter(request):
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+
+        new_assignment = Assignment.objects.create(
+            name = data["name"],
+            subject = data["subject"],
+            progress = int(data["progress"]),
+            description = data["description"]
+        )
+
+        new_assignment.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
 
 def delete_assignment(request, id):
     
