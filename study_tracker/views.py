@@ -70,7 +70,6 @@ def create_assignment(request):
     context = {'form': form}
     return render(request, 'create_assignment.html', context)
 
-
 @csrf_exempt
 def create_assignment_ajax(request):
 # create object of form
