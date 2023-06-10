@@ -1,0 +1,9 @@
+asgiref==3.6.0
+dj-database-url==2.0.0
+Django==4.1.6
+django-cors-headers==3.14.0
+numpy==1.24.2
+sqlparse==0.4.3
+typing_extensions==4.6.2
+tzdata==2022.7
+whitenoise==6.4.0
